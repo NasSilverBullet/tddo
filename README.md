@@ -12,5 +12,5 @@ go get github.com/NasSilverBullet/tddo
 
 ```sh
 cd project
-tddo
+tddo # generete TODO
 ```
