@@ -14,9 +14,12 @@ func TestExist(t *testing.T) {
 		{"hoge.go", false},
 	}
 	for _, test := range existsTests {
+		td := Tddo{
+			Name: test.in,
+		}
 		t.Run(test.in, func(t *testing.T) {
-			if expected, actual := test.out, exists(test.in); expected != actual {
-				t.Errorf("esists(%s) wont %t but got %t", test.in, expected, actual)
+			if expected, actual := test.out, td.Exists(); expected != actual {
+				t.Errorf("td.Exists wont %t but got %t", expected, actual)
 			}
 
 		})
@@ -35,8 +38,11 @@ func TestConfirm(t *testing.T) {
 	}
 	for _, test := range confirmTests {
 		t.Run(test.in, func(t *testing.T) {
-			if expected, actual := test.out, confirm(bytes.NewBufferString(test.in)); expected != actual {
-				t.Errorf("confirm(%s) wont %t but got %t", test.in, expected, actual)
+			td := &Tddo{
+				Reader: bytes.NewBufferString(test.in),
+			}
+			if expected, actual := test.out, td.Confirm(); expected != actual {
+				t.Errorf("td.confirm() wont %t but got %t", expected, actual)
 			}
 
 		})
