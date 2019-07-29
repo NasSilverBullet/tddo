@@ -1,4 +1,4 @@
-![tddo image](doc/tdoo.jpeg)
+![tddo image](doc/tddo.jpeg)
 
 # TODO file generator for test-driven development
 
