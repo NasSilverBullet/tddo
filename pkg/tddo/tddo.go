@@ -55,7 +55,7 @@ func (td *Tddo) Confirm() bool {
 
 // Generate files with given name and text contents
 func (td *Tddo) Generate() error {
-	f, err := os.OpenFile(td.Name, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0755)
+	f, err := os.OpenFile(td.Name, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0664)
 	if err != nil {
 		return err
 	}
