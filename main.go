@@ -1,5 +1,14 @@
 package main
 
+import (
+	"log"
+
+	"github.com/NasSilverBullet/tddo/pkg/tddo"
+)
+
 func main() {
-	run()
+	err := tddo.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
 }

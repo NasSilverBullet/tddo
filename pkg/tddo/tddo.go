@@ -1,4 +1,4 @@
-package main
+package tddo
 
 import (
 	"bufio"
@@ -22,12 +22,27 @@ const (
 `
 )
 
-func run() {
-	if ok := exists(FILENAME); !ok {
-		fmt.Printf("%s is already exists", FILENAME)
-		return
+// Run genereting todo file
+func Run() error {
+	if ok := exists(FILENAME); ok {
+		fmt.Printf("%s is already exists\n", FILENAME)
+		return nil
 	}
-	confirm(os.Stdin)
+	fmt.Printf("? Generate %s in current directory? (Y/n)\n", FILENAME)
+	if ok := confirm(os.Stdin); !ok {
+		fmt.Println("No")
+		return nil
+	}
+	dir, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+	fmt.Printf("Generating %s in %s\n", FILENAME, dir)
+	if err := generate(FILENAME, TEMPLATE); err != nil {
+		return err
+	}
+	fmt.Printf("Successfully generated %s\n", FILENAME)
+	return nil
 }
 
 func exists(name string) bool {
@@ -44,7 +59,7 @@ func confirm(r io.Reader) bool {
 	return true
 }
 
-func create(name, text string) error {
+func generate(name, text string) error {
 	f, err := os.OpenFile(name, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0755)
 	if err != nil {
 		return err

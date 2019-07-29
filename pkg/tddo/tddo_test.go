@@ -1,4 +1,4 @@
-package main
+package tddo
 
 import (
 	"bytes"
@@ -10,8 +10,8 @@ func TestExist(t *testing.T) {
 		in  string
 		out bool
 	}{
-		{"README.md", true},
-		{"hoge.md", false},
+		{"tddo.go", true},
+		{"hoge.go", false},
 	}
 	for _, test := range existsTests {
 		t.Run(test.in, func(t *testing.T) {
